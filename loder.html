@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Loader</title>
+   
+   <script>
+     window.onload=function()
+	 {
+	    document.getElementById('loader').style.display="none";
+		document.getElementById('content').style.display="block";
+	 }
+	</script> 
+	
+	<style>
+	#loader
+	{
+	   border: 0px solid red;
+	   position: absolute;
+	   margin: auto;
+	   top: 0;
+	   bottom:0;
+	   left: 0;
+	   right:0;
+	   width: 600px;
+	   height:600px;
+	}
+	#loader img
+	{
+	   width: 600px;
+	}
+	#content
+	{
+	   display: none;
+	}
+	
+	</style>
+</head>
+
+<body>
+
+<div id="loader">
+    <img src="Restaurant/preloader.gif">
+</div>
+
+<div id="content">
+   <img src="Restaurant/dog.png">
+   <img src="Restaurant/park.png">
+   <img src="Restaurant/park2.jpg">
+   <img src="Restaurant/squirrel.jpg">
+   
+   
+</div>
+</body>
+
+</html>
