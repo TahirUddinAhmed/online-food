@@ -209,6 +209,15 @@
 
 .shop-body .shop-product {
     display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 5px;
+}
+.shop-body .shop-product .shop-category {
+    border: 1px solid #edecec;
+    padding: 1.2rem 0.9rem;
+}
+.shop-body .shop-product  .products {
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
@@ -309,6 +318,18 @@ footer .footer-link ul li a{
      .team-card {
         flex-direction: column;
     }
+
+    .shop-body .shop-product {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .shop-body .shop-product  .products {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 5px;
+    }
     /* !contact us page */
     footer .upper-footer {
         flex-direction: column;
@@ -331,10 +352,17 @@ footer .footer-link ul li a{
 }
 
 /* tablet */
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 768px) {
     .food-category {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .shop-body .shop-product  .products {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
     
 }
 
