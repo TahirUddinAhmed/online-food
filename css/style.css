@@ -145,7 +145,7 @@
         hsl(1.56759 70.0643% 64.439%),
         hsl(0.00000265346 68.306% 64.1176%)
       );
-
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
       margin-bottom: 0.4rem;
       padding-bottom: 1.8rem;
 
@@ -154,8 +154,10 @@
     width: 64%;
     height: 180px;
     margin: 0 auto;
+    
     /* border: 1px solid; */
     padding: 0.7rem;
+
 }
 .members .member-profile img {
     width: 100%;
@@ -163,6 +165,7 @@
     object-fit: cover;
     border-radius: 50%;
     color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: 3px solid #edecec;
 }
 .members h3 {
