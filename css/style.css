@@ -277,6 +277,83 @@
 
 /* !Shop page design */
 
+/* shopping cart */
+.shopping-cart {
+    display: grid;
+    grid-template-columns: 610px 280px;
+    gap: 20px;
+}
+
+.shopping-cart .product-list {
+    /* border: 1px solid; */
+    background-color: #edecec;
+    border-radius: 10px;
+    
+}
+.shopping-cart .product-list .list-items {
+    /* border: 1px solid; */
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid #666666;
+}
+
+
+.shopping-cart .product-list .list-items .product-details {
+    display: flex;
+
+}
+.shopping-cart .product-list .list-items .product-details .product-content {
+    margin-left: 1.2rem;
+}
+.shopping-cart .product-list .list-items .product-details .product-title {
+    font-size: 22px;
+
+
+}
+.shopping-cart .product-list .list-items .product-price {
+    font-size: 22px;
+
+
+}
+.shopping-cart .product-list img {
+    width: 160px;
+    border-radius: 10px;
+}
+.shopping-cart .prodct-summary {
+    border: 1px solid;
+    background-color: #2D4356;
+    color: #efefef;
+    border-radius: 10px;
+    
+}
+.shopping-cart .prodct-summary h3 {
+   padding: 0.5rem 0.7rem;
+    
+}
+.shopping-cart .prodct-summary .summary-details {
+    /* border: 1px solid; */
+    padding: 0rem 1.2rem;
+    font-size: 19px;
+    margin-bottom: 0.5rem;
+}
+.shopping-cart .prodct-summary .summary-details p{
+    /* border: 1px solid; */
+    margin: 0;
+}
+.shopping-cart .prodct-summary .checkout-option{
+    margin-top: 1.2rem;
+    padding: 0 0.7rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+}
+/* !shopping cart */
+
+
+
+
 /* footer */
 footer {
    
@@ -347,6 +424,11 @@ footer .footer-link ul li a{
         grid-template-columns: repeat(2, 1fr);
         gap: 5px;
     }
+
+    .shopping-cart {
+        grid-template-columns: 1fr;
+        
+    }
     /* !contact us page */
     footer .upper-footer {
         flex-direction: column;
@@ -391,6 +473,12 @@ footer .footer-link ul li a{
         grid-template-columns: 1fr;
      
      }
+
+     .shopping-cart {
+        grid-template-columns: 1fr;
+        
+    }
+    
     /* !contact us page */
 }
 @media only screen and (min-width: 992px) {
