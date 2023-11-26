@@ -5,6 +5,23 @@
     outline: none;
 }
 
+/* header design */
+#shopping-cart-btn {
+    position: relative;
+}
+#shopping-cart-btn .cart-count {
+    position: absolute;
+    top: -10px;
+    right: -7px;
+    font-size: 10px;
+    font-weight: 500;
+    background-color:#cc0000;
+    color: #efefef;
+    padding: 1px 7px;
+    border-radius: 50%;
+}
+/* !header design */
+
 .carousel-item img {
     height: 536px;
     object-fit: cover;
