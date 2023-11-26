@@ -186,16 +186,70 @@
     margin-bottom: 0.7rem;
 }
 
-
-
-
-
-
-
-
 /* !About Us Page */
 
+/* Shop page design */
+#shop .shop-header {
+    background-color: #000;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#shop .shop-header h2 {
+    color: #efefef;
+    font-size: 35px;
+    
+}
 
+#shop .shop-header p {
+    color: #f3f4f5;
+}
+
+.shop-body .shop-product {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+.shop-body .shop-product .shop-food {
+    background-color: #edecec;
+    border-radius: 5px;
+    padding-bottom: 0.6rem;
+
+    
+}
+.shop-body .shop-product .shop-food img {
+    width: 100%;
+}
+.shop-body .shop-product .shop-food .product-details {
+    padding: 0.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.shop-body .shop-product .shop-food .price {
+    font-size: 21px;
+    margin: 0;
+}
+.shop-body .shop-product .shop-food .or-price {
+    font-size: 16px;
+    text-decoration: line-through;
+}
+
+.shop-food .product-details .order-btn {
+    background-color: rgb(255, 132, 0);
+    color: #fff;
+    margin: 0.6rem 0;
+    padding: 0.3rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+
+/* !Shop page design */
 
 /* footer */
 footer {
