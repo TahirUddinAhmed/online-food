@@ -9,7 +9,7 @@ $(document).ready(function() {
         // rtl: true,
         loop:true,
         margin:10,
-        nav: true,
+        // nav: true,
         responsive:{
             0:{
                 items:1.4
@@ -30,7 +30,7 @@ $(document).ready(function() {
         // rtl: true,
         loop:true,
         margin:10,
-        nav: true,
+        // nav: true,
         responsive:{
             0:{
                 items:1.4
