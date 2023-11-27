@@ -1,8 +1,8 @@
 $(document).ready(function() {
 
-    $("#register").click(function() {
-        alert("Work is under construction")
-    })
+    // $("#register").click(function() {
+    //     alert("Work is under construction")
+    // })
    
     // food owl carousel
     $("#foods .owl-carousel").owlCarousel({

@@ -332,14 +332,12 @@
    padding: 0.5rem 0.7rem;
     
 }
-.shopping-cart .prodct-summary .summary-details {
-    /* border: 1px solid; */
+.shopping-cart .prodct-summary .summary-details {  
     padding: 0rem 1.2rem;
     font-size: 19px;
     margin-bottom: 0.5rem;
 }
 .shopping-cart .prodct-summary .summary-details p{
-    /* border: 1px solid; */
     margin: 0;
 }
 .shopping-cart .prodct-summary .checkout-option{
