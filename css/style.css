@@ -381,7 +381,43 @@
     margin-left: 0.2rem;
     font-size: 18px;
 }
+
+
+
 /* !login page design */
+
+/* register page design */
+#register h2 {
+    text-align: center;
+}
+.register-form {
+    width: 45%;
+    /* border: 1px solid #333; */
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: 1rem 2rem;
+    margin: 1rem auto;
+}
+.register-form label {
+    font-size: 18px;
+    margin-bottom: 0.4rem;
+}
+.register-form input {
+    padding: 0.5rem;
+}
+.register-form .register-btn {
+    width: 100%;
+    padding: 0.4rem 0;
+}
+.register-form .notregister {
+    font-size: 16px;
+    text-align: center;
+}
+.register-form .notregister .reg-redirect {
+    margin-left: 0.2rem;
+    font-size: 18px;
+}
+/* !register page design */
 
 
 
@@ -461,10 +497,10 @@ footer .footer-link ul li a{
         
     }
 
-    .login-form {
+    .login-form, .register-form {
         width: 97%;
     }
-    .login-form label {
+    .login-form label, .register-form label {
         font-size: 16px;
     }
     /* !contact us page */
