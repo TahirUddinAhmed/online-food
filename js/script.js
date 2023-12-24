@@ -42,5 +42,19 @@ $(document).ready(function() {
                 items:5.4
             }
         }
+    });
+
+    // password field show/hide functionality
+    $("#pwd-check").on("click", function() {
+        const passwordField = $("#pwd");
+        const button = $(this);
+
+        if(passwordField.attr("type") === 'password') {
+            passwordField.attr("type", "text");
+            button.text("Hide");
+        } else {
+            passwordField.attr("type", "password");
+            button.text("Show");
+        }
     })
 });

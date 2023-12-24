@@ -382,6 +382,15 @@
     font-size: 18px;
 }
 
+.login-form .pwd-field {
+    position: relative;
+}
+.login-form .pwd-field #pwd-check {
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    cursor: pointer;
+}
 
 
 /* !login page design */
