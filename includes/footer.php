@@ -10,7 +10,7 @@
               <li><a href="#">About</a></li>
               <li><a href="#">Category</a></li>
               <li><a href="#">Contact</a></li>
-              <li><a href="./Admin/index.html">My Account</a></li>
+              <li><a href="./Admin/index.php">My Account</a></li>
             </ul>
           </div>
         </div>
