@@ -1,3 +1,4 @@
+<?php require_once 'config/DB.php' ?>
 <!DOCTYPE html>
 <html>
   <head>
