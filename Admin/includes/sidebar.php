@@ -20,7 +20,7 @@
                                     <a class="nav-link" href="#">List All Food</a>
                                 </nav>
                             </div>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="category.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Category
                             </a>

@@ -1,3 +1,6 @@
+<?php ob_start();  // Start output buffering ?>
+<?php require_once '../config/DB.php' ?>
+<?php require_once 'functions.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
