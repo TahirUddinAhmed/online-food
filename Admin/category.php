@@ -48,6 +48,31 @@ if(isset($_GET['delete_id'])) {
     }
     
 }
+
+// edit category items 
+if(isset($_GET['edit_id'])) {
+    $edit_id = check_input($_GET['edit_id']);
+
+    // grab the category row
+    $cat_query = "SELECT * FROM category WHERE cat_id = $edit_id";
+    $edit_result = mysqli_query($conn, $cat_query);
+}
+
+if(isset($_POST['edit_category'])) {
+    $edit_cat_id = check_input($_POST['edit_cat_id']);
+    $edit_cat_name = check_input($_POST['edit_category_name']); 
+
+    // edit query 
+    $edit_query = "UPDATE `category` SET `name` = '$edit_cat_name' WHERE `cat_id` = $edit_cat_id;";
+    $edit_cat_result = mysqli_query($conn, $edit_query);
+
+    if(!$edit_cat_result) {
+        die("QUERY FAILED" . mysqli_error($conn));
+    } else {
+        $cat_success = "Category Updated Successfully";
+        header("Location: category.php");
+    }
+}
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -62,6 +87,27 @@ if(isset($_GET['delete_id'])) {
                         <p class="text-danger cat-error"><?= $cat_error ?? null; ?></p>
                         <input type="submit" name="add_category" value="Add Category" class="btn btn-primary mt-2">
                     </form>
+
+                    <?php
+                    if(isset($_GET['edit_id'])) {
+                        while($data=mysqli_fetch_assoc($edit_result)) {
+                            $cat_id = $data['cat_id'];
+                            $cat_name = $data['name'];
+                        }
+                     ?>
+                     <div class="mt-4 border px-3 py-2">
+                        <h4 class="mb-3">Edit Category</h4>
+                        <form action="" method="post">
+                            <input type="hidden" name="edit_cat_id" value="<?= $cat_id ?>">
+                            <input type="text" name="edit_category_name" class="form-control" id="category" value="<?= $cat_name ?? null ?>">
+                            <p class="text-danger cat-error"><?= $cat_error ?? null; ?></p>
+                            <input type="submit" name="edit_category" value="Edit Category" class="btn btn-success mt-2">
+                        </form>
+                    </div>
+                     <?php
+                    }
+                    ?>
+                    
                 </div>
 
                 <div class="col-lg-7 gx-5 border p-3">
@@ -91,7 +137,7 @@ if(isset($_GET['delete_id'])) {
                                     <!-- delete button -->
                                     <a href="category.php?delete_id=<?= $cat_id ?>" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash"></i></a>
                                     <!-- edit button -->
-                                    <a href="#" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="category.php?edit_id=<?= $cat_id ?>" class="btn btn-sm btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>
                         <?php
