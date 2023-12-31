@@ -29,12 +29,10 @@ CREATE TABLE Categories (
 -- Create Menu Items Table
 CREATE TABLE MenuItems (
     ItemID INT PRIMARY KEY,
-    RestaurantID INT,
     CategoryID INT,
     Name VARCHAR(100),
     Description TEXT,
     Price DECIMAL(10, 2),
-    FOREIGN KEY (RestaurantID) REFERENCES Users(UserID),
     FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
 

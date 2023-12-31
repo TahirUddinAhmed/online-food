@@ -1,5 +1,10 @@
 <?php require_once "includes/header.php" ?>
-
+<?php 
+ // select the category table 
+ $category_table = "SELECT * FROM category";
+ $category_result = mysqli_query($conn, $category_table);
+ $no_of_category = mysqli_num_rows($category_result);
+?>
     <section id="shop">
         <div class="shop-header">
             <h2>Shop</h2>
@@ -12,12 +17,24 @@
                 <div class="shop-category">
                     <h3>Food Categories</h3>
                     <select name="categories" id="" class="form-control">
-                        <option value="">Choose Category</option>
-                        <option value="">Pizza</option>
+                    <option value="">Choose Category</option>
+                    <?php
+                      if($no_of_category > 0) {
+                        while($data = mysqli_fetch_assoc($category_result)) {
+                          // grab the category name
+                          $categoryName = $data['name'];
+                        ?>
+                            <option value="<?=$categoryName?>"><?= $categoryName ?></option>
+                        <?php
+                        }
+                      }
+                    ?>
+                        
+                        <!-- <option value="">Pizza</option>
                         <option value="">Veg Thali</option>
                         <option value="">Non-veg Thali</option>
                         <option value="">Soup</option>
-                        <option value="">Fast Food</option>
+                        <option value="">Fast Food</option> -->
                     </select>
                 </div>
                 <div class="products">
