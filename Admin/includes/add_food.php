@@ -7,7 +7,7 @@
     <main>
         <?= $str ?? null ?>
         <div class="container mt-3">
-            <h2 class="mb-5 text-center">Food Item Add</h2>
+            <h2 class="mb-5 text-center">Add Food Item</h2>
 
             <form action="" method="post">
             <div class="row container">
@@ -55,7 +55,7 @@
                             <input type="file" name="food-image" class="form-control">
                         </div>
                         <div class="d-grid gap-2">
-                            <button class="btn btn-primary btn-lg" name="add-food" type="submit">Add</button>
+                            <button class="btn btn-primary btn-lg" name="add-food" type="submit">Add Food</button>
                         </div>
                     </div>
                 </div>
