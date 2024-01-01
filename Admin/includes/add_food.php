@@ -2,6 +2,12 @@
  if(isset($_POST['add-food'])) {
     $str = "yess it works";
  }
+
+ // fetch all the categories
+ $category_query = "SELECT * FROM category";
+ $category_result = mysqli_query($conn, $category_query);
+ $no_of_cat_item = mysqli_num_rows($category_result);
+
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -22,11 +28,20 @@
                         <div class="mb-3">
                             <label for="food_category">Category</label>
                             <select name="food-category" class="form-control" id="cat">
-                                <option value="default">Choose Category</option>
-                                <option value="default">Choose Category</option>
-                                <option value="default">Choose Category</option>
-                                <option value="default">Choose Category</option>
-                                <option value="default">Choose Category</option>
+                            <option value="default">Choose Category</option>
+                            <?php
+                                if($no_of_cat_item > 0) {
+                                    while($row = mysqli_fetch_assoc($category_result)) {
+                                        $cat_id = $row['cat_id'];
+                                        $cat_name = $row['name'];
+                            ?>
+                                    <option value="<?= $cat_name ?>"><?= $cat_name ?></option>
+
+                            <?php
+                                    }
+                                }
+
+                            ?>
                             </select>
                         </div>
 
