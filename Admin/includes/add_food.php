@@ -1,6 +1,7 @@
 <?php
  // ToDo: 
- //  1. Validate the form 
+ //  1. Validate the form - completed
+ //  2. Insert data into database
  if(isset($_POST['add-food'])) {
     $f_name = check_input($_POST['food_name']);
     $f_category = check_input($_POST['food-category']);
@@ -33,6 +34,33 @@
         $errors[] = "Offer price must be a valid positive number.";
     }
 
+    // image 
+    // support extension
+    $allowed_ext = array('png', 'jpg', 'jpeg');
+
+    $food_image = $_FILES['food_image']['name'];
+    $food_image_temp = $_FILES['food_image']['tmp_name'];
+    $image_size = $_FILES['food_image']['size'];
+    $target_dir = "../assets/Restaurant/$food_image";
+
+    $image_ext = explode('.', $food_image);
+    $image_ext = strtolower(end($image_ext));
+
+    if(in_array($image_ext, $allowed_ext)){
+        if($image_size <= 5000000){
+            // image upload
+            move_uploaded_file($food_image_temp, $target_dir);
+            
+            
+        }else {
+            $message = '<p class="text-danger">Image size is too large, image size should be less than 500KB.</p>';
+        }
+    }else{
+        $message = '<p class="text-danger">Only .png, .jpg, .jpen and .gif allowed</p>';
+    } 
+
+
+
 
     
 
@@ -48,7 +76,10 @@
     <main>
         <div class="container mt-3">
             <h2 class="mb-5 text-center">Add Food Item</h2>
+            <p class="alert alert-danger">
+                <?= $message ?? null ?>
 
+            </p>
             <?php
                 if (!empty($errors)) {
                     echo "<div class='alert alert-danger'>";
@@ -63,13 +94,14 @@
                     // echo $errors;
                     echo "</ul>";
                     echo "</div>";
-                } else {
-                    // Process the form data and save to the database
-                    // Add your code here to insert the data into the database or perform other actions
-                    echo "<div class='alert alert-success'>Form submitted successfully!</div>";
-                }
+                } 
+                // else {
+                //     // Process the form data and save to the database
+                //     // Add your code here to insert the data into the database or perform other actions
+                //     echo "<div class='alert alert-success'>Form submitted successfully!</div>";
+                // }
             ?>
-            <form action="" method="post">
+            <form action="" method="post" enctype="multipart/form-data">
             <div class="row container">
                     <div class="col-8 border p-3">
                         <!-- <h2>Form to add food item</h2> -->
@@ -121,7 +153,7 @@
                         <!-- <h2>Save</h2> -->
                         <div class="mb-3 mt-4">
                             <label for="food-image">Food Image</label>
-                            <input type="file" name="food-image" class="form-control">
+                            <input type="file" name="food_image" class="form-control">
                         </div>
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary btn-lg" name="add-food" type="submit">Add Food</button>
