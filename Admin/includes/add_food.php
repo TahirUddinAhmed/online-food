@@ -1,6 +1,41 @@
 <?php
+ // ToDo: 
+ //  1. Validate the form 
  if(isset($_POST['add-food'])) {
-    $str = "yess it works";
+    $f_name = check_input($_POST['food_name']);
+    $f_category = check_input($_POST['food-category']);
+    $original_price = check_input($_POST['regular-price']);
+    $offer_price = check_input($_POST['offer-price']);
+    $desc = check_input($_POST['food-desc']);
+
+    $errors = array();
+
+    // validate the form 
+    if(empty($f_name)) {
+        $errors[] = " Food name is required!";
+    }
+
+    // validate food category field
+    if($f_category == 'default') {
+        $errors[] = "Please choose a category";
+    }
+
+    // validate price field
+    if(empty($original_price)) {
+        $errors[] = "Original Price is required";
+    } else if(!is_numeric($original_price) || $original_price <= 0) {
+        $errors[] = "Original price must be a valid positive number.";
+    }
+
+    if(empty($offer_price)) {
+        $errors[] = "Offer price is required";
+    } else if(!is_numeric($offer_price) || $offer_price <= 0) {
+        $errors[] = "Offer price must be a valid positive number.";
+    }
+
+
+    
+
  }
 
  // fetch all the categories
@@ -11,10 +46,29 @@
 ?>
 <div id="layoutSidenav_content">
     <main>
-        <?= $str ?? null ?>
         <div class="container mt-3">
             <h2 class="mb-5 text-center">Add Food Item</h2>
 
+            <?php
+                if (!empty($errors)) {
+                    echo "<div class='alert alert-danger'>";
+                    echo "<ul>";
+                    // foreach ($errors as $error) {
+                    //     echo "<li>$error</li>";
+                    // }
+                    foreach ($errors as $err) {
+                        echo "<li>$err</li>";
+                    }
+                    // echo gettype($errors);
+                    // echo $errors;
+                    echo "</ul>";
+                    echo "</div>";
+                } else {
+                    // Process the form data and save to the database
+                    // Add your code here to insert the data into the database or perform other actions
+                    echo "<div class='alert alert-success'>Form submitted successfully!</div>";
+                }
+            ?>
             <form action="" method="post">
             <div class="row container">
                     <div class="col-8 border p-3">
@@ -22,7 +76,7 @@
 
                         <div class="mb-3">
                             <label for="food_name">Food Name</label>
-                            <input type="text" name="food_name" class="form-control" placeholder="Enter food name">
+                            <input type="text" name="food_name" class="form-control" value="<?= $f_name ?? null ?>" placeholder="Enter food name">
                         </div>
 
                         <div class="mb-3">
@@ -47,12 +101,12 @@
 
                         <div class="mb-3">
                             <label for="regular-price">Original Price</label>
-                            <input type="number" name="regular-price" class="form-control" placeholder="Enter the original Price">
+                            <input type="number" name="regular-price" class="form-control" value="<?= $original_price ?? null ?>" placeholder="Enter the original Price">
                         </div>
 
                         <div class="mb-3">
                             <label for="offer-price">Offer Price</label>
-                            <input type="number" name="offer-price" class="form-control" placeholder="Entter offer price">
+                            <input type="number" name="offer-price" class="form-control" value="<?= $offer_price ?>" placeholder="Entter offer price">
                         </div>
 
                         
