@@ -51,6 +51,15 @@
             // image upload
             move_uploaded_file($food_image_temp, $target_dir);
             
+            //INSERT INTO `menuitems` (`ItemID`, `CategoryID`, `Name`, `Description`, `Price`, `original-price`, `added_on`) VALUES ('1', '11', 'Pizza ', 'pizza', '564', '900', current_timestamp());
+            $insert = "INSERT INTO `menuitems` (`CategoryID`, `Name`, `Description`, `Price`, `original-price`, `food_img`, `added_on`) VALUES ($f_category, '$f_name', '$desc', $original_price, $offer_price, '$food_image', current_timestamp());";
+            $insert_result = mysqli_query($conn, $insert);
+
+            if(!$insert_result) {
+                die("QUERY FAILED". mysqli_error($conn));
+            } else {
+                header("Location: fooditem.php?source=view&added");
+            }
             
         }else {
             $message = '<p class="text-danger">Image size is too large, image size should be less than 500KB.</p>';
@@ -121,7 +130,7 @@
                                         $cat_id = $row['cat_id'];
                                         $cat_name = $row['name'];
                             ?>
-                                    <option value="<?= $cat_name ?>"><?= $cat_name ?></option>
+                                    <option value="<?= $cat_id ?>"><?= $cat_name ?></option>
 
                             <?php
                                     }
