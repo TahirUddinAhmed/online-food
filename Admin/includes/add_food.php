@@ -85,10 +85,10 @@
     <main>
         <div class="container mt-3">
             <h2 class="mb-5 text-center">Add Food Item</h2>
-            <p class="alert alert-danger">
+            <!-- <p class="alert alert-danger">
                 <?= $message ?? null ?>
 
-            </p>
+            </p> -->
             <?php
                 if (!empty($errors)) {
                     echo "<div class='alert alert-danger'>";

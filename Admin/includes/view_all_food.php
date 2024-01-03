@@ -1,8 +1,20 @@
+<?php
+ if(isset($_GET['added'])) {
+    $success = "Product has been added successfully";
+ }
+?>
 <div id="layoutSidenav_content">
     <main>
         <div class="container mt-4">
             <h3 class="mb-4">View all product</h3>
 
+           
+                <?php
+                if(isset($success)) {
+                    echo "<div class='alert alert-success'>".$success ."</div>";
+                }
+                ?>
+            
             <div class="border p-2">
                 <table id="datatablesSimple" class="mt-3">
                     <thead>
