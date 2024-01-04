@@ -10,6 +10,22 @@
  if(!$result) {
     die("QUERY FAILED" . mysqli_error($conn));
  }
+
+ // delete funcationality
+ if(isset($_GET['delete'])) {
+    $d_id = $_GET['delete'];
+
+    // delete query 
+    $food_query = "DELETE FROM menuitems WHERE `menuitems`.`ItemID` = $d_id";
+    $delete_result = mysqli_query($conn, $food_query);
+
+    if(!$delete_result) {
+        die("QUERY FAILED" . mysqli_error($conn));
+    } else {
+        // refresh the page
+        header("Location: fooditem.php");
+    }
+ }
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -83,7 +99,7 @@
                             </td>
                             <!-- Delete & edit button -->
                             <td>
-                                <a href="?" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="?delete=<?=$Item_id?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
                                 <a href="?" class="btn btn-sm btn-success">Edit</a>
                             </td>
                            
