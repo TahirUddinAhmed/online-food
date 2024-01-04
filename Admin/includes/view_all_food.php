@@ -2,6 +2,14 @@
  if(isset($_GET['added'])) {
     $success = "Product has been added successfully";
  }
+
+ $sql = "SELECT * FROM `menuitems` ORDER BY `menuitems`.`ItemID` DESC";
+ $result = mysqli_query($conn, $sql);
+ $no_of_row = mysqli_num_rows($result);
+
+ if(!$result) {
+    die("QUERY FAILED" . mysqli_error($conn));
+ }
 ?>
 <div id="layoutSidenav_content">
     <main>
@@ -19,41 +27,74 @@
                 <table id="datatablesSimple" class="mt-3">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Image</th>
+                            <th>Details</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                            <!-- <th>Start date</th>
+                            <th>Salary</th> -->
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>Image</th>
+                            <th>Details</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                            <!-- <th>Start date</th>
+                            <th>Salary</th> -->
                         </tr>
                     </tfoot>
                     <tbody>
+                    <?php
+                     if($no_of_row > 0) {
+                        while($data = mysqli_fetch_assoc($result)) {
+                            $Item_id = $data['ItemID'];
+                            $cat_id = $data['CategoryID'];
+                            $name = $data['Name'];
+                            $price = $data['original-price'];
+                            $food_img = $data['food_img'];
+
+                        $cat_query = "SELECT * FROM `category` WHERE `cat_id` = ?";
+                        $stmt = mysqli_prepare($conn, $cat_query);
+                        $stmt->bind_param('i', $cat_id);
+                        $stmt->execute();
+                        $category_result = $stmt->get_result();
+
+                        if(!$category_result) {
+                            die("QUERY FAILED" . mysqli_error($conn));
+                        } 
+                        
+
+                        while($catData = mysqli_fetch_assoc($category_result)) {
+                            $cat_name = $catData['name'];
+                        }
+                     ?>
                         <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            <td>
+                                <img src="../assets/Restaurant/<?= $food_img ?>" width="120" alt="">
+                            </td>
+                            <td>
+                                <h6><?= $name ?></h6>
+                                <p><?= $price ?></p>
+                            </td>
+                            <td>
+                                <h6><?= $cat_name ?></h6>
+                            </td>
+                            <!-- Delete & edit button -->
+                            <td>
+                                <a href="?" class="btn btn-sm btn-danger">Delete</a>
+                                <a href="?" class="btn btn-sm btn-success">Edit</a>
+                            </td>
+                           
                         </tr>
-                        <tr>
-                            <td>Garrett Winters</td>
-                            <td>Accountant</td>
-                            <td>Tokyo</td>
-                            <td>63</td>
-                            <td>2011/07/25</td>
-                            <td>$170,750</td>
-                        </tr>
+
+                    <?php
+                        }
+                     }
+                    ?>
+                        
+                        
                     </tbody>
                 </table>
 
