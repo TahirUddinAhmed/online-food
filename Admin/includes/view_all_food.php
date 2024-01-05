@@ -1,6 +1,8 @@
 <?php
  if(isset($_GET['added'])) {
     $success = "Product has been added successfully";
+} else if(isset($_GET['update'])) {
+     $success = "Product has been update successfully";
  }
 
  $sql = "SELECT * FROM `menuitems` ORDER BY `menuitems`.`ItemID` DESC";

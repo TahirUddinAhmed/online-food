@@ -13,6 +13,90 @@
     die("QUERY FAILED" . mysqli_error($conn));
   }
 
+  // update form data 
+  if(isset($_POST['update-food'])) {
+    $f_name = check_input($_POST['food_name']);
+    $f_category = check_input($_POST['food-category']);
+    $original_price = check_input($_POST['regular-price']);
+    $offer_price = check_input($_POST['offer-price']);
+    $desc = check_input($_POST['food-desc']);
+
+    $errors = array();
+
+    // validate the form 
+    if(empty($f_name)) {
+        $errors[] = " Food name is required!";
+    }
+
+    // validate food category field
+    if($f_category == 'default') {
+        // $errors[] = "Please choose a category";
+        $cat_query = "SELECT * FROM menuitems WHERE ItemID = $food_id";
+        $cat_result = mysqli_query($conn, $cat_query);
+
+        while($data=mysqli_fetch_assoc($cat_result)) {
+            $f_category = $data['CategoryID'];
+        }
+    } 
+
+    // validate price field
+    if(empty($original_price)) {
+        $errors[] = "Original Price is required";
+    } else if(!is_numeric($original_price) || $original_price <= 0) {
+        $errors[] = "Original price must be a valid positive number.";
+    }
+
+    if(empty($offer_price)) {
+        $errors[] = "Offer price is required";
+    } else if(!is_numeric($offer_price) || $offer_price <= 0) {
+        $errors[] = "Offer price must be a valid positive number.";
+    }
+
+    // image 
+    // support extension
+    $allowed_ext = array('png', 'jpg', 'jpeg');
+
+    $food_image = $_FILES['food_image']['name'];
+    $food_image_temp = $_FILES['food_image']['tmp_name'];
+    $image_size = $_FILES['food_image']['size'];
+    $target_dir = "../assets/Restaurant/$food_image";
+
+    $image_ext = explode('.', $food_image);
+    $image_ext = strtolower(end($image_ext));
+
+    if(!empty($food_image)) {
+        if(in_array($image_ext, $allowed_ext)){
+            if($image_size <= 5000000){
+                // image upload
+                move_uploaded_file($food_image_temp, $target_dir); 
+            } else {
+                $message = '<p class="text-danger">Image size is too large, image size should be less than 500KB.</p>';
+            }
+        }else{
+            $message = '<p class="text-danger">Only .png, .jpg, .jpen and .gif allowed</p>';
+        } 
+
+    } else {
+        $grab_img = "SELECT * FROM menuitems WHERE ItemID = $food_id";
+        $image_result = mysqli_query($conn, $grab_img);
+
+        while($data = mysqli_fetch_assoc($image_result)) {
+            $food_image = $data['food_img'];
+        }
+    }
+
+    // //INSERT INTO `menuitems` (`ItemID`, `CategoryID`, `Name`, `Description`, `Price`, `original-price`, `added_on`) VALUES ('1', '11', 'Pizza ', 'pizza', '564', '900', current_timestamp());
+    $update = "UPDATE `menuitems` SET `CategoryID` = '$f_category', `Name` = '$f_name', `Description` = '$desc', `Price` = '$original_price', `offer-price` = '$offer_price', `food_img` = '$food_image' WHERE `menuitems`.`ItemID` = $food_id;";
+    $update_result = mysqli_query($conn, $update);
+
+    if(!$update_result) {
+      $src = "QUERY FAILED" . mysqli_error($conn);
+    } else {
+        header("Location: fooditem.php?source=view&update");
+    }
+
+  }
+
   
   
 
@@ -21,7 +105,24 @@
     <main>
         <div class="container mt-3">
             <h2 class="mb-5 text-center">Edit Food Item</h2>
-            
+            <?= $src ?? null ?>
+
+            <?php
+                if (!empty($errors)) {
+                    echo "<div class='alert alert-danger'>";
+                    echo "<ul>";
+                    // foreach ($errors as $error) {
+                    //     echo "<li>$error</li>";
+                    // }
+                    foreach ($errors as $err) {
+                        echo "<li>$err</li>";
+                    }
+                    // echo gettype($errors);
+                    // echo $errors;
+                    echo "</ul>";
+                    echo "</div>";
+                }
+            ?>
             
             <form action="" method="post" enctype="multipart/form-data">
             <div class="row container">
@@ -52,7 +153,6 @@
 
                           
                     ?>
-
                         <div class="mb-3">
                             <label for="food_name">Food Name</label>
                             <input type="text" name="food_name" class="form-control" value="<?= $food_name ?? null ?>" placeholder="Enter food name">
@@ -66,7 +166,11 @@
                             while($catData=mysqli_fetch_assoc($cat_result)) {
                                 $cat_id = $catData['cat_id'];
                                 $cat_name = $catData['name'];
-                                echo '<option value="<?= $cat_id ?>">'.$cat_name.'</option>';
+
+                                
+                            ?>
+                            <option value="<?=$cat_id?>"><?= $cat_name ?></option>
+                            <?php
                               }
                             ?>
                                 
@@ -95,7 +199,7 @@
                         <!-- <h2>Save</h2> -->
                         <div class="mb-3 mt-4">
                             <label for="food-image">Food Image</label>
-                            <input type="file" name="food_image" class="form-control">
+                            <input type="file" name="food_image" class="form-control" value="<?= $food_image ?>">
 
                             <div class="mt-2 text-center">
                                 <img src="../assets/Restaurant/<?=$food_image?>" style="width:100%; margin: 0 auto;" class="img-fluid border" alt="">
@@ -109,7 +213,7 @@
                                 <button type="submit" class="btn btn-danger" style="width: 100%;">Delete</button>
                             </div>
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-primary" style="width: 100%;">Edit & Save</button>
+                                <button type="submit" name="update-food" class="btn btn-primary" style="width: 100%;">Edit & Save</button>
                             </div>
                         </div>
                     </div>
