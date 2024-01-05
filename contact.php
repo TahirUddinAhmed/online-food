@@ -1,5 +1,8 @@
 <?php require_once "includes/header.php" ?>
-
+<!-- //
+query to insert data
+INSERT INTO `contact` (`id`, `fullname`, `email`, `phone`, `message`, `added_on`) VALUES ('1', 'Tahir Uddin Ahmed', '01tahirahmed@gmail.com', '9365910717', 'Hey I am the developer', current_timestamp());
+-->
    <section class="container" id="contact">
 	<h2 class="text-center mt-4">Contact Us</h2>
 	<p class="text-center text-muted">Contact Us for Exceptional Support and Assistance.</p>
@@ -14,6 +17,10 @@
 				<div class="mb-3">
 					<label for="email">Email</label>
 					<input type="email" name="email" class="form-control" id="">
+				</div>
+				<div class="mb-3">
+					<label for="phone">Phone</label>
+					<input type="tel" name="phone" class="form-control" id="">
 				</div>
 				<div class="mb-3">
 					<label for="message">Message</label>

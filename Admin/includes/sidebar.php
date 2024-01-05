@@ -28,7 +28,7 @@
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Orders
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="contact.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
                                 Contact
                             </a>
