@@ -28,7 +28,7 @@ $(document).ready(function() {
     // related food owl carousel
     $("#relatedFood .owl-carousel").owlCarousel({
         // rtl: true,
-        loop:true,
+        loop:false,
         margin:10,
         // nav: true,
         responsive:{

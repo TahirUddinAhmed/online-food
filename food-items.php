@@ -1,15 +1,57 @@
 <?php require_once "includes/header.php" ?>
+<?php
+  if(isset($_GET['id'])) {
+    $food_id = $_GET['id'];
+  }
+
+  $query = "SELECT * FROM menuitems WHERE ItemID = $food_id";
+  $food_result = mysqli_query($conn, $query);
+
+  if(!$food_result) {
+    die("QUERY FAILED" . mysqli_error($conn));
+  } 
+
+  while($data=mysqli_fetch_assoc($food_result)) {
+    $food_name = $data['Name'];
+    $category_id = $data['CategoryID'];
+    $original_price = $data['Price'];
+    $offer_price = $data['offer-price'];
+    $food_image = $data['food_img'];
+    $desc = $data['Description'];
+
+  }
+  $total_save = $original_price - $offer_price;
+
+  // query to retreive category id 
+  $cat_query = "SELECT * FROM `category` WHERE cat_id = $category_id";
+  $cat_result = mysqli_query($conn, $cat_query);
+
+  while($data=mysqli_fetch_assoc($cat_result)) {
+    $cat_name = $data['name'];
+  }
+
+  // related product 
+  $related_product = "SELECT * FROM menuitems WHERE CategoryID = $category_id";
+  $related_result = mysqli_query($conn, $related_product);
+
+ 
+
+
+?>
 
     <!-- single item page -->
     <div class="container">
+      
         <section id="product" class="py-3">
             <div class="container">
                 <div class="row">
+              
                     <div class="col-sm-6">
-                        <img src="./assets/Restaurant/2.jpg" alt="product" class="img-fluid">
+                        <img src="./assets/Restaurant/<?= $food_image ?>" alt="product" class="img-fluid">
                         <div class="row pt-4 font-16 font-balo">
                             <div class="col">
-                                <button type="submit" class="btn btn-danger form-control">Buy Now</button>
+                                <!-- <button type="submit" class="btn btn-danger form-control">Buy Now</button> -->
+                                <a href="#" class="btn btn-danger" style="width: 100%;">Buy Now</a>
                             </div>
                             <div class="col">
                                 <button type="submit" class="btn btn-warning form-control">Add to cart</button>
@@ -19,8 +61,8 @@
                         </div>
                     </div>
                     <div class="col-sm-6 py-3">
-                        <h5 class="font-balo font-20">Hamburger</h5>
-                        <small>Fast Food</small>
+                        <h5 class="font-balo font-20"><?= $food_name ?></h5>
+                        <small><?= $cat_name ?></small>
 
                         <div class="d-flex">
                             <div class="rating text-warning font-12">
@@ -39,52 +81,26 @@
                         <div class="product-price font-rale mt-3">
                             <div class="product-item d-flex">
                                 <p class="w-25">M.R.P</p>
-                                <P><strike>465</strike></P>
+                                <P><strike><?= $original_price ?></strike></P>
                             </div>
                             <div class="product-item d-flex">
                                 <p class="w-25">Deal Price</p>
-                                <P class=""><span class="font-20 text-danger font-rale">250</span> <small>include of all taxes</small></P>
+                                <P class=""><span class="font-20 text-danger font-rale"><?= $offer_price ?></span> <small>include of all taxes</small></P>
                             </div>
                             <div class="product-item d-flex">
                                 <p class="w-25">You Save</p>
-                                <P class=""><span class="font-20 text-danger font-rale">251</span></P>
+                                <P class=""><span class="font-20 text-danger font-rale"><?= $total_save ?></span></P>
                             </div>
                         </div>
                         <!-- !product price -->
 
-                        <!-- policy -->
-                        <!-- <div id="policy">
-                            <div class="d-flex">
-                                <div class="return text-center me-5">
-                                    <div class="font-20 my-2 color-second">
-                                        <span class="fas fa-retweet border p-3 rounded-pill"></span>
-
-                                    </div>
-                                    <a href="" class="font-rale font-12">10 Days <br>Replacement</a>
-                                </div>
-                                <div class="return text-center me-5">
-                                    <div class="font-20 my-2 color-second">
-                                        <span class="fas fa-truck border p-3 rounded-pill"></span>
-
-                                    </div>
-                                    <a href="" class="font-rale font-12">Daily Tuition<br>Deliver</a>
-                                </div>
-                                <div class="return text-center">
-                                    <div class="font-20 my-2 color-second">
-                                        <span class="fas fa-check-double border p-3 rounded-pill"></span>
-
-                                    </div>
-                                    <a href="" class="font-rale font-12">1 year <br>Warrenty</a>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- !policy -->
+                        
                         <hr>
 
                         <!-- order detail -->
                         <div id="order-detail" class="font-rale d-flex flex-column text-dark">
-                          <small>Delivery By: Nov 21 - Nov - 26</small>
-                          <small>₹23 Delivery fee will apply</small>
+                          <!-- <small>Delivery By: Nov 21 - Nov - 26</small>
+                          <small>₹23 Delivery fee will apply</small> -->
                           <!-- <small>Sold by <a href="#">Daily Electronics</a>(4.5 out of 5 | 19,752 ratings)</small> -->
                           <small><i class="fas fa-map-marker-alt color-primary"></i>&nbsp;&nbsp;Deliver to Customer - 782105</small>
                         </div>
@@ -111,8 +127,7 @@
                     <div class="col-12 mt-2">
                       <h6 class="font-rubik">Product Description</h6>
                       <hr>
-                      <p class="font-rale font-14">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci itaque obcaecati dignissimos provident animi et?</p>
-                      <p class="font-rale font-14">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci itaque obcaecati dignissimos provident animi et?</p>
+                      <p class="font-rale font-14"><?= $desc ?></p>
                     </div>
                 </div>
             </div>
@@ -121,8 +136,21 @@
         <section id="relatedFood">
             <h2>Related Food</h2>
             <div class="owl-carousel owl-theme mt-4">
+            <?php
+             while($data = mysqli_fetch_assoc($related_result)) {
+              $food_id = $data['ItemID'];
+              $food_name = $data['Name'];
+              $category_id = $data['CategoryID'];
+              $original_price = $data['Price'];
+              $offer_price = $data['offer-price'];
+              $food_image = $data['food_img'];
+             
+            ?>
                 <div class="food-item">
-                  <img src="./assets/Restaurant/fast1.jpg" alt="" />
+                  <a href="food-items.php?id=<?= $food_id ?>">
+                    <img src="./assets/Restaurant/<?= $food_image ?>" alt="" />
+
+                  </a>
                   <div class="food-details">
                     <div class="ratings">
                       <span class="fa fa-star checked"></span>
@@ -131,71 +159,15 @@
                       <span class="fa fa-star"></span>
                       <span class="fa fa-star"></span>
                     </div>
-                    <p class="price">160 <span class="or-price">220</span></p>
-                    <h3>Dosa</h3>
+                    <p class="price"><?= $offer_price ?> <span class="or-price"><?= $original_price ?></span></p>
+                    <h3><?= $food_name ?></h3>
                     <a href="#" class="order-btn">Order Now</a>
                   </div>
                 </div>
-                <div class="food-item">
-                  <img src="./assets/Restaurant/n1.jpg" alt="" />
-                  <div class="food-details">
-                    <div class="ratings">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                    </div>
-                    <p class="price">210 <span class="or-price">360</span></p>
-                    <h3>Chicken With Curd</h3>
-                    <a href="#" class="order-btn">Order Now</a>
-                  </div>
-                </div>
-                <div class="food-item">
-                  <img src="./assets/Restaurant/5.jpg" alt="" />
-                  <div class="food-details">
-                    <div class="ratings">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                    </div>
-                    <p class="price">98 <span class="or-price">180</span></p>
-                    <h3>Special Roti Thali</h3>
-                    <a href="#" class="order-btn">Order Now</a>
-                  </div>
-                </div>
-                <div class="food-item">
-                  <img src="./assets/Restaurant/6.jpg" alt="" />
-                  <div class="food-details">
-                    <div class="ratings">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                    </div>
-                    <p class="price">150 <span class="or-price">168</span></p>
-                    <h3>With Gulub Jamun</h3>
-                    <a href="#" class="order-btn">Order Now</a>
-                  </div>
-                </div>
-                <div class="food-item">
-                  <img src="./assets/Restaurant/2.jpg" alt="" />
-                  <div class="food-details">
-                    <div class="ratings">
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star checked"></span>
-                      <span class="fa fa-star"></span>
-                      <span class="fa fa-star"></span>
-                    </div>
-                    <p class="price">160 <span class="or-price">220</span></p>
-                    <h3>Dosa</h3>
-                    <a href="#" class="order-btn">Order Now</a>
-                  </div>
-                </div>
+            <?php
+             }
+            ?>
+                
               </div>
         </section>
     </div>

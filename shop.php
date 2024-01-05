@@ -42,6 +42,7 @@
                   <?php
                     if($no_foods > 0) {
                       while($data = mysqli_fetch_assoc($result)) {
+                        $food_id = $data['ItemID'];
                         $food_name = $data['Name'];
                         $category_id = $data['CategoryID'];
                         $original_price = $data['Price'];
@@ -49,7 +50,9 @@
                         $food_image = $data['food_img'];
                   ?>
                     <div class="shop-food">
+                      <a href="food-items.php?id=<?= $food_id ?>">
                         <img src="./assets/Restaurant/<?= $food_image ?>" alt="" />
+                      </a>
                         <div class="product-details">
                           <div class="ratings">
                             <span class="fa fa-star checked"></span>
