@@ -4,6 +4,12 @@
  $category_table = "SELECT * FROM category";
  $category_result = mysqli_query($conn, $category_table);
  $no_of_category = mysqli_num_rows($category_result);
+
+ // grab all the menu items
+ $query = "SELECT * FROM menuitems";
+ $result = mysqli_query($conn, $query);
+ $no_foods = mysqli_num_rows($result);
+
 ?>
     <section id="shop">
         <div class="shop-header">
@@ -29,17 +35,21 @@
                         }
                       }
                     ?>
-                        
-                        <!-- <option value="">Pizza</option>
-                        <option value="">Veg Thali</option>
-                        <option value="">Non-veg Thali</option>
-                        <option value="">Soup</option>
-                        <option value="">Fast Food</option> -->
+                      
                     </select>
                 </div>
                 <div class="products">
+                  <?php
+                    if($no_foods > 0) {
+                      while($data = mysqli_fetch_assoc($result)) {
+                        $food_name = $data['Name'];
+                        $category_id = $data['CategoryID'];
+                        $original_price = $data['Price'];
+                        $offer_price = $data['offer-price'];
+                        $food_image = $data['food_img'];
+                  ?>
                     <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
+                        <img src="./assets/Restaurant/<?= $food_image ?>" alt="" />
                         <div class="product-details">
                           <div class="ratings">
                             <span class="fa fa-star checked"></span>
@@ -48,117 +58,19 @@
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                           </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
+                          <p class="price"><?= $offer_price ?> <span class="or-price"><?= $original_price ?></span></p>
+                          <h5 class="text-center"><?= $food_name ?></h5>
                           <a href="#" class="order-btn">Order Now</a>
                         </div>
                     </div>
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
+                  <?php
+                      }
+                    }
+                  ?>
                     
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
-                    <div class="shop-food">
-                        <img src="./assets/Restaurant/fast1.jpg" alt="" />
-                        <div class="product-details">
-                          <div class="ratings">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
-                          <p class="price">160 <span class="or-price">220</span></p>
-                          <h3>Dosa</h3>
-                          <a href="#" class="order-btn">Order Now</a>
-                        </div>
-                    </div>
+                    
+                    
+                    
                 </div>
                 
            
