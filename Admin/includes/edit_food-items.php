@@ -210,7 +210,8 @@
                         </div> -->
                         <div class="row">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-danger" style="width: 100%;">Delete</button>
+                                <!-- <button type="submit" name="delete" class="btn btn-danger" style="width: 100%;">Delete</button> -->
+                                <a href="?delete=<?= $food_id ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this food item?')" style="width: 100%">Delete</a>
                             </div>
                             <div class="col-sm-6">
                                 <button type="submit" name="update-food" class="btn btn-primary" style="width: 100%;">Edit & Save</button>
