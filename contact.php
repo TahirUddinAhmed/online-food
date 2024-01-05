@@ -3,10 +3,55 @@
 query to insert data
 INSERT INTO `contact` (`id`, `fullname`, `email`, `phone`, `message`, `added_on`) VALUES ('1', 'Tahir Uddin Ahmed', '01tahirahmed@gmail.com', '9365910717', 'Hey I am the developer', current_timestamp());
 -->
+<?php
+ if(isset($_POST['contact'])) {
+	$fullname = check_input($_POST['fullname']);
+	$email = check_input($_POST['email']);
+	$phone = check_input($_POST['phone']);
+	$message = check_input($_POST['message']);
+
+	// validate the form
+	if(validateContact($fullname, $email, $phone, $message)) {
+		$allErr = 'All fields are required!';
+	} else {
+		// query to insert data into db
+		$query = "INSERT INTO `contact` (`fullname`, `email`, `phone`, `message`, `added_on`) VALUES ('$fullname', '$email', '$phone', '$message', current_timestamp());";
+		$result = mysqli_query($conn, $query);
+		
+		if(!$result) {
+			die('QUERY FAILED' . mysqli_error($conn));
+		} else {
+			$success = 'Thank you for reaching out! We have received your message and will get back to you as soon as possible';
+		}
+		
+	}
+
+	
+	
+ }
+
+ 
+?>
+
    <section class="container" id="contact">
+	
 	<h2 class="text-center mt-4">Contact Us</h2>
 	<p class="text-center text-muted">Contact Us for Exceptional Support and Assistance.</p>
 
+	<?php
+		if(isset($allErr)) {
+		echo  '<div class="alert alert-danger" role="alert">
+			   '.$allErr.'
+			</div>';
+
+		}
+		if(isset($success)) {
+		echo  '<div class="alert alert-primary" role="alert">
+			   '.$success.'
+			</div>';
+
+		}
+	?>
 	<div class="contact-form">
 		<div class="form">
 			<form action="" method="post">
@@ -27,7 +72,7 @@ INSERT INTO `contact` (`id`, `fullname`, `email`, `phone`, `message`, `added_on`
 					<textarea name="message" class="form-control" id="" cols="30" rows="10"></textarea>
 				</div>
 
-				<input type="submit" value="Send" class="btn btn-primary d-block">
+				<input type="submit" name="contact" value="Send" class="btn btn-primary d-block">
 			</form>
 		</div>
 
