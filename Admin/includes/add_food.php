@@ -52,7 +52,7 @@
             move_uploaded_file($food_image_temp, $target_dir);
             
             //INSERT INTO `menuitems` (`ItemID`, `CategoryID`, `Name`, `Description`, `Price`, `original-price`, `added_on`) VALUES ('1', '11', 'Pizza ', 'pizza', '564', '900', current_timestamp());
-            $insert = "INSERT INTO `menuitems` (`CategoryID`, `Name`, `Description`, `Price`, `original-price`, `food_img`, `added_on`) VALUES ($f_category, '$f_name', '$desc', $original_price, $offer_price, '$food_image', current_timestamp());";
+            $insert = "INSERT INTO `menuitems` (`CategoryID`, `Name`, `Description`, `Price`, `offer-price`, `food_img`, `added_on`) VALUES ($f_category, '$f_name', '$desc', $original_price, $offer_price, '$food_image', current_timestamp());";
             $insert_result = mysqli_query($conn, $insert);
 
             if(!$insert_result) {

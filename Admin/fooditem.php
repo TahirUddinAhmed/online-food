@@ -10,6 +10,9 @@
     case 'add': 
         include 'includes/add_food.php';
         break;
+    case 'edit':
+        include 'includes/edit_food-items.php';
+        break;
     default: 
         include 'includes/view_all_food.php';
         // break;

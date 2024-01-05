@@ -68,7 +68,7 @@
                             $Item_id = $data['ItemID'];
                             $cat_id = $data['CategoryID'];
                             $name = $data['Name'];
-                            $price = $data['original-price'];
+                            $price = $data['offer-price'];
                             $food_img = $data['food_img'];
 
                         $cat_query = "SELECT * FROM `category` WHERE `cat_id` = ?";
@@ -100,7 +100,7 @@
                             <!-- Delete & edit button -->
                             <td>
                                 <a href="?delete=<?=$Item_id?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this product?')">Delete</a>
-                                <a href="?" class="btn btn-sm btn-success">Edit</a>
+                                <a href="?source=edit&id=<?=$Item_id?>" class="btn btn-sm btn-success">Edit</a>
                             </td>
                            
                         </tr>
