@@ -49,14 +49,11 @@
                     <div class="col-sm-6">
                         <img src="./assets/Restaurant/<?= $food_image ?>" alt="product" class="img-fluid">
                         <div class="row pt-4 font-16 font-balo">
-                            <div class="col">
-                                <!-- <button type="submit" class="btn btn-danger form-control">Buy Now</button> -->
-                                <a href="#" class="btn btn-danger" style="width: 100%;">Buy Now</a>
-                            </div>
-                            <div class="col">
+                            
+                            <!-- <div class="col">
                                 <button type="submit" class="btn btn-warning form-control">Add to cart</button>
 
-                            </div>
+                            </div> -->
 
                         </div>
                     </div>
@@ -120,6 +117,11 @@
                               <!-- !product qty section -->
                           </div>
                       </div>
+
+                      <div class="mt-3">
+                                <!-- <button type="submit" class="btn btn-danger form-control">Buy Now</button> -->
+                                <a href="#" class="btn btn-danger" style="width: 100%;">Order Now</a>
+                            </div>
 
 
                     </div>

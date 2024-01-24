@@ -55,10 +55,10 @@
          <button class="btn btn-outline-success" type="submit">Search</button>
        </form> -->
 
-            <a class="text-reset me-3" href="addtocart.php"  id="shopping-cart-btn">
+            <!-- <a class="text-reset me-3" href="addtocart.php"  id="shopping-cart-btn">
               <i class="fa-solid fa-cart-shopping fa-lg"></i>
               <p class="cart-count">1</p>
-            </a>
+            </a> -->
 
             <div class="d-flex align-items-center">
               <!-- <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
