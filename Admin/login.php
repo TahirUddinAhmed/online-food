@@ -36,8 +36,7 @@
 
         while($row=mysqli_fetch_assoc($result)) {
             $user_id = $row['UserID'];
-            $first_name = $row['FirstName'];
-            $last_name = $row['LastName'];
+            $fullname = $row['Fullname'];
             $db_password = $row['Password'];
             $phone = $row['Phone'];
         }
@@ -47,11 +46,11 @@
         } else {
             // login successfully
             $_SESSION['u_id'] = $user_id;
-            $_SESSION['first_name'] = $first_name;
-            $_SESSION['last_name'] = $last_name;
+            $_SESSION['fullname'] = $fullname;
 
             // redirect to the admin home page
             header("location: index.php");
+            exit();
 
         }
     }

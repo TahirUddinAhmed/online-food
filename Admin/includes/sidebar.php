@@ -51,7 +51,7 @@
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        <?= $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
+                        <?= $_SESSION['fullname'] ?? null?>
                     </div>
                 </nav>
             </div>
