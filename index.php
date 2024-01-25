@@ -1,5 +1,25 @@
 <?php require_once "includes/header.php" ?>
+<?php
+ if(isset($_GET['reg'])) {
+  if($_GET['reg'] == 'success') {
+    $reg_success = "Your account has been created successfully";
+  }
+ }
+?>
+<!-- account modal -->
+<?php
+ if(isset($reg_success)) {
+  ?>
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <?= $reg_success ?>
+  <a href="login.php" class="ms-4">login</a>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  <?php
+ }
 
+?>
+<!-- account modal -->
   <?php
   // <!-- header carousal -->
   include('includes/_header-carousel.php');
