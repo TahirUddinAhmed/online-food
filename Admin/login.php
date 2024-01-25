@@ -11,12 +11,49 @@
     // validate the form 
     if(empty($email_addr)) {
         $emptyEmail = "Email is required!";
-    } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } else if(!filter_var($email_addr, FILTER_VALIDATE_EMAIL)) {
         $emailErr = "Please Enter a valid email ID";
     }
 
     if(empty($password)) {
         $passErr = "Password is required!";
+    }
+
+    if(!empty($email_addr)) {
+        // email is exits or not
+        $uiExits = uiExist($conn, $email_addr);
+        if($uiExits === false) {
+            $uiErr = "Email is not registred as admin";
+        }
+
+        $sql = "SELECT * FROM `users` WHERE `Email` = '$email_addr' AND `role` = 'admin'";
+        $result = mysqli_query($conn, $sql);
+
+        if(!$result) {
+            die("QUERY FAILED" . mysqli_error($conn));
+        }
+
+
+        while($row=mysqli_fetch_assoc($result)) {
+            $user_id = $row['UserID'];
+            $first_name = $row['FirstName'];
+            $last_name = $row['LastName'];
+            $db_password = $row['Password'];
+            $phone = $row['Phone'];
+        }
+
+        if($password !== $db_password) {
+            $wrongPass = "Password is incorrect";
+        } else {
+            // login successfully
+            $_SESSION['u_id'] = $user_id;
+            $_SESSION['first_name'] = $first_name;
+            $_SESSION['last_name'] = $last_name;
+
+            // redirect to the admin home page
+            header("location: index.php");
+
+        }
     }
     
  }
@@ -47,18 +84,21 @@
                                     <div class="card-body">
 
                                        <!-- Login Form -->
-
+                                            <div class="mb-3">
+                                                <span class="text-danger"><?= $uiErr ?? null ?></span>
+                                            </div>
                                         <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" name="email" id="inputEmail" type="email" value="<?= $email_addr ?? null ?>" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
                                                 <span class="text-danger"><?= $emptyEmail ?? null; ?></span>
                                                 <span class="text-danger"><?= $emailErr ?? null; ?></span>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" name="password" id="inputPassword" type="password" value="<?= $password ?? null ?>" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
                                                 <span class="text-danger"><?= $passErr ?? null ?></span>
+                                                <span class="text-danger"><?= $wrongPass ?? null ?></span>
                                             </div>
                                             <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />

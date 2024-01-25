@@ -1,6 +1,14 @@
 <?php ob_start();  // Start output buffering ?>
 <?php require_once '../config/DB.php' ?>
 <?php require_once 'functions.php'; ?>
+
+ <?php
+    if(!isset($_SESSION['u_id'])) {
+        header("location: login.php");
+    }
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
     <head>

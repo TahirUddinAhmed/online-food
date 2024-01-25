@@ -15,3 +15,19 @@ function check_input($input) {
 
     return $input;
 }
+
+function uiExist($conn, $email) {
+   $sql = "SELECT * FROM `users` WHERE `Email` = '$email' AND `role` = 'admin'";
+   $result = mysqli_query($conn, $sql);
+
+   if(!$result) {
+    die("QUERY FAILED" . mysqli_error($conn));
+   } 
+
+   if($row = mysqli_fetch_assoc($result)) {
+    return $row;
+   } else {
+    return false;
+   }
+   
+}
