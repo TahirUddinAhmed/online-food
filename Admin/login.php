@@ -1,3 +1,28 @@
+
+<?php
+  require_once 'functions.php';
+  require_once '../config/DB.php';
+
+ if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // grab the form data 
+    $email_addr = check_input($_POST['email']);
+    $password = check_input($_POST['password']);
+
+    // validate the form 
+    if(empty($email_addr)) {
+        $emptyEmail = "Email is required!";
+    } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $emailErr = "Please Enter a valid email ID";
+    }
+
+    if(empty($password)) {
+        $passErr = "Password is required!";
+    }
+    
+ }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -6,7 +31,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Login - SB Admin</title>
+        <title>Login - Online Food</title>
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
@@ -20,14 +45,20 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Login</h3></div>
                                     <div class="card-body">
-                                        <form>
+
+                                       <!-- Login Form -->
+
+                                        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputEmail" type="email" placeholder="name@example.com" />
+                                                <input class="form-control" name="email" id="inputEmail" type="email" placeholder="name@example.com" />
                                                 <label for="inputEmail">Email address</label>
+                                                <span class="text-danger"><?= $emptyEmail ?? null; ?></span>
+                                                <span class="text-danger"><?= $emailErr ?? null; ?></span>
                                             </div>
                                             <div class="form-floating mb-3">
-                                                <input class="form-control" id="inputPassword" type="password" placeholder="Password" />
+                                                <input class="form-control" name="password" id="inputPassword" type="password" placeholder="Password" />
                                                 <label for="inputPassword">Password</label>
+                                                <span class="text-danger"><?= $passErr ?? null ?></span>
                                             </div>
                                             <div class="form-check mb-3">
                                                 <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
@@ -35,12 +66,12 @@
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.html">Forgot Password?</a>
-                                                <a class="btn btn-primary" href="index.html">Login</a>
+                                                <input type="submit" name="admin-login" value="Login" class="btn btn-primary">
                                             </div>
                                         </form>
-                                    </div>
-                                    <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
+
+                                         <!-- !Login Form -->
+
                                     </div>
                                 </div>
                             </div>
@@ -52,11 +83,9 @@
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
                         <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                            <div class="text-muted">Copyright &copy; Online Food 2024</div>
                             <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
+                                Developed by Tahir Uddin Ahmed
                             </div>
                         </div>
                     </div>
