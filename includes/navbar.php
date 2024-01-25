@@ -60,14 +60,28 @@
               <p class="cart-count">1</p>
             </a> -->
 
-            <div class="d-flex align-items-center">
-              <!-- <button data-mdb-ripple-init type="button" class="btn btn-primary me-3">
-            
-         </button> -->
-              <a href="login.php" id="register" class="btn btn-primary">
-                <i class="fa-solid fa-user fa-2xs me-2"></i> Log In / Register
-              </a>
-            </div>
+            <?php
+              if(isset($_SESSION['u_id'])) {
+                ?>
+                  <div class="d-flex align-items-center">
+                    <a href="admin/" id="register" class="btn btn-outline-info">
+                      <i class="fa-solid fa-user fa-2xm me-2"></i> <?= $_SESSION['fullname'] ?? null ?>
+                    </a>
+                  </div>
+
+                <?php
+              } else {
+                ?>
+
+                  <div class="d-flex align-items-center">
+                    <a href="login.php" id="register" class="btn btn-primary">
+                      <i class="fa-solid fa-user fa-2xs me-2"></i> Log In / Register
+                    </a>
+                  </div>
+
+                <?php
+              }
+            ?>
           </div>
         </div>
       </nav>

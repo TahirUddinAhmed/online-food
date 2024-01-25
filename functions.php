@@ -31,3 +31,27 @@ function validateContact($fullname, $email, $phone, $message):bool {
 
     return $val;
 }
+
+/**
+ * uiExists Function
+ *
+ * @param $conn
+ * @param $email
+ * @return bool
+ */
+
+function uiExist($conn, $email) {
+    $sql = "SELECT * FROM `users` WHERE `Email` = '$email' AND `role` = 'buyer'";
+    $result = mysqli_query($conn, $sql);
+ 
+    if(!$result) {
+     die("QUERY FAILED" . mysqli_error($conn));
+    } 
+ 
+    if($row = mysqli_fetch_assoc($result)) {
+     return $row;
+    } else {
+     return false;
+    }
+    
+ }
