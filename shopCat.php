@@ -1,19 +1,53 @@
 <?php require_once "includes/header.php" ?>
 <?php 
+    if($_SERVER['REQUEST_METHOD'] === 'POST') {
+      // grab the category id 
+      // if(isset($_POST['categories'])) {
+      //   $cat_id =$_POST['categories'];
+      // } else {
+      //   // header("Location: shop.php?err=empty");
+      //   echo "Category is required";
+      // }
+      $cat_id =$_POST['categories'];
+
+      if(empty($cat_id)) {
+        $emptyCat = "Please select a category";
+        // exit();
+      } else {
+        $catSql = "SELECT * FROM category WHERE cat_id = $cat_id";
+        $cat_result = mysqli_query($conn, $catSql);
+  
+        if(!$cat_result) {
+          die("QUERY FAILED" . mysqli_error($conn));
+        }
+  
+        while($data=mysqli_fetch_assoc($cat_result)) {
+          $categoryName = $data['name'];
+        }
+      }
+      // echo $cat_id;
+
+  
+    }
+
  // select the category table 
  $category_table = "SELECT * FROM category";
  $category_result = mysqli_query($conn, $category_table);
  $no_of_category = mysqli_num_rows($category_result);
 
  // grab all the menu items
- $query = "SELECT * FROM menuitems";
+ if(isset($cat_id) && !empty($cat_id)) {
+   $query = "SELECT * FROM menuitems WHERE CategoryID = $cat_id";
+  } else {
+   $query = "SELECT * FROM menuitems";
+ }
  $result = mysqli_query($conn, $query);
  $no_foods = mysqli_num_rows($result);
 
 ?>
     <section id="shop">
         <div class="shop-header">
-            <h2>Shop</h2>
+            <h2>Shop <?= $categoryName ?? "Category"; ?></h2>
             <p>Order your favourite food</p>
         </div>
         
@@ -22,6 +56,7 @@
             <div class="shop-product">
                 <div class="shop-category">
                     <h3>Food Categories</h3>
+                    <span class="mt-2 mb-2 text-danger"><?= $emptyCat ?? null ?></span>
                     <?php include('includes/_searchCategory.php') ?>
                     
                 </div>
