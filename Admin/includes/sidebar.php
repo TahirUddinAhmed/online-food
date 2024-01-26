@@ -32,21 +32,15 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-comment"></i></div>
                                 Contact
                             </a>
-                            <a class="nav-link" href="#">
+                            <!-- <a class="nav-link" href="#">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                                 Team Members
-                            </a>
-                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#users" aria-expanded="false" aria-controls="collapseLayouts">
+                            </a> -->
+
+                            <a class="nav-link" href="users.php">
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-user-plus"></i></div>
                                 Users
-                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
-                            <div class="collapse" id="users" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                                <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="#">Add Users</a>
-                                    <a class="nav-link" href="#">View All Users</a>
-                                </nav>
-                            </div>
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
