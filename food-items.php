@@ -12,6 +12,7 @@
   } 
 
   while($data=mysqli_fetch_assoc($food_result)) {
+    $food_id = $data['ItemID'];
     $food_name = $data['Name'];
     $category_id = $data['CategoryID'];
     $original_price = $data['Price'];
@@ -120,7 +121,7 @@
 
                       <div class="mt-3">
                                 <!-- <button type="submit" class="btn btn-danger form-control">Buy Now</button> -->
-                                <a href="#" class="btn btn-danger" style="width: 100%;">Order Now</a>
+                                <a href="order.php?id=<?= $food_id ?>" class="btn btn-danger" style="width: 100%;">Order Now</a>
                             </div>
 
 

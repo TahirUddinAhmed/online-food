@@ -85,7 +85,7 @@
                           </div>
                           <p class="price"><?= $offer_price ?> <span class="or-price"><?= $original_price ?></span></p>
                           <h5 class="text-center"><?= $food_name ?></h5>
-                          <a href="#" class="order-btn">Order Now</a>
+                          <a href="order.php?id=<?= $food_id ?>" class="order-btn">Order Now</a>
                         </div>
                     </div>
                   <?php

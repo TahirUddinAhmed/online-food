@@ -32,7 +32,7 @@
                 </div>
                 <p class="price"><?= $offer_price ?> <span class="or-price"><?= $original_price ?></span></p>
                 <h3><?= $food_name ?></h3>
-                <a href="food-items.html" class="order-btn">Order Now</a>
+                <a href="order.php?id=<?= $food_id ?>" class="order-btn">Order Now</a>
             </div>
         </div>
         <?php
