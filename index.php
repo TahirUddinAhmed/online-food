@@ -20,6 +20,20 @@
 
 ?>
 <!-- account modal -->
+<!-- account modal -->
+<?php
+ if(isset($_GET['notLogged'])) {
+  ?>
+<div class="alert alert-primary alert-dismissible fade show" role="alert">
+  <?php echo "Please Create OR login to an existing account ? " ?>
+  <a href="login.php" class="ms-4">login</a>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+  <?php
+ }
+
+?>
+<!-- account modal -->
   <?php
   // <!-- header carousal -->
   include('includes/_header-carousel.php');

@@ -69,7 +69,7 @@
             </form>
 
             <div class="notregister">
-              <p>Already have an account?<a href="login.html" class="reg-redirect">Login</a></p>
+              <p>Already have an account?<a href="login.php" class="reg-redirect">Login</a></p>
           </div>
         </div>
 
