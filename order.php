@@ -82,7 +82,18 @@
 
     // if there is no error. 
     if(empty($error)) {
-        echo "Hey,, wow";
+        // insert into data base 
+        
+        $sql = "INSERT INTO `orders` (`user_id`, `customer_name`, `email`, `phone`, `address`, `quantity`, `total_price`, `order_date`, `food_id`) VALUES ('$uId', '$username', '$userEmail', '$userPhone', '$userAddress', '$quantity', '$offer_price', current_timestamp(), '$food_id')";
+        $result = mysqli_query($conn, $sql);
+
+        if(!$result) {
+            die("QUERY FAILED" . mysqli_error($conn));
+        } else {
+            header("location: index.php?ordered");
+        }
+
+
     }
  }  
 ?>
