@@ -24,7 +24,7 @@
                                 <div class="sb-nav-link-icon"><i class="fa-solid fa-grip"></i></div>
                                 Category
                             </a>
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="orders.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                                 Orders
                             </a>
