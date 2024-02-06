@@ -48,8 +48,43 @@
 
 //  order form 
  if($_SERVER['REQUEST_METHOD'] == "POST") {
-    
- }
+    $username = $_POST['fullname'];
+    $userEmail = $_POST['email'];
+    $userPhone = $_POST['phone'];
+    $userAddress = $_POST['address'];
+    $quantity = $_POST['quantity'];
+
+    // validate the form 
+    $error = []; // an empty array
+
+    if(empty($username)) {
+        $error['emptyName'] = "Fullname is required!";
+    }
+
+    if(empty($userEmail)) {
+        $error['emptyEmail'] = "Email is required";
+    } else if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error['invalidEmail'] = "Enter a valid email ID";
+    }
+
+    if(empty($userPhone)) {
+        $error['emptyPhone'] = "Phone number is required";
+    }
+
+    if(empty($userAddress)) {
+        $error['emptyAddr'] = "Address is required";
+    }
+
+    if(empty($quantity)) {
+        $error['emptyQuantity'] = "Quantity is required";
+    }
+
+
+    // if there is no error. 
+    if(empty($error)) {
+        echo "Hey,, wow";
+    }
+ }  
 ?>
 
 <div class="container">
@@ -62,23 +97,60 @@
             <div class="form-group mb-2">
                 <label for="fullname">Full Name</label>
                 <input type="text" name="fullname" class="form-control" value="<?= $fullname ?? null ?>">
+            <?php
+                if(isset($error['emptyName'])) {
+            ?>
+                <span class="text-danger"><?= $error['emptyName'] ?></span>
+            <?php
+                }
+            ?>
             </div> 
 
             <div class="form-group mb-2">
                 <label for="email">Email</label>
                 <input type="email" name="email" class="form-control" value="<?= $email ?? null ?>">
+                <?php
+                if(isset($error['emptyEmail'])) {
+               ?>
+                   <span class="text-danger"><?= $error['emptyEmail'] ?></span>
+                <?php
+                }
+                ?>
             </div>        
             <div class="form-group mb-2">
                 <label for="phone">Phone</label>
                 <input type="phone" name="phone" class="form-control" value="<?= $phone ?? null ?>">
+                <?php
+                if(isset($error['emptyPhone'])) {
+               ?>
+                   <span class="text-danger"><?= $error['emptyPhone'] ?></span>
+                <?php
+                }
+                ?>
             </div>               
             <div class="form-group mb-2">
                 <label for="address">Address</label>
-                <input type="text" name="address" class="form-control" id="">
+                <input type="text" name="address" class="form-control" value="<?= $userAddress ?? null ?>">
+            
+                <?php
+                if(isset($error['emptyAddr'])) {
+               ?>
+                   <span class="text-danger"><?= $error['emptyAddr'] ?></span>
+                <?php
+                }
+                ?>
             </div>        
             <div class="form-group mb-2">
                 <label for="quantity">Quantity</label>
                 <input type="number" name="quantity" class="form-control" id="">
+            
+                <?php
+                if(isset($error['emptyQuantity'])) {
+               ?>
+                   <span class="text-danger"><?= $error['emptyQuantity'] ?></span>
+                <?php
+                }
+                ?>
             </div>        
 
             <button type="submit" name="ordernow" class="btn btn-primary mx-auto d-block mt-4" style="width: 40%;">Order Now</button>
