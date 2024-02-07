@@ -26,23 +26,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="about.php">About</a>
               </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Category
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Veg Thali</a></li>
-                  <li><a class="dropdown-item" href="#">Non Veg Thali</a></li>
-                  <li><a class="dropdown-item" href="#">Fast Food</a></li>
-                  <li><a class="dropdown-item" href="#">Soup</a></li>
-                </ul>
-              </li>
+              
               <li class="nav-item">
                 <a class="nav-link" href="contact.php">Contact</a>
               </li>
