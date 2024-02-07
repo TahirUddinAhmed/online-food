@@ -40,15 +40,6 @@
                 }
               ?>
             </ul>
-            <!-- <form class="d-flex" role="search">
-         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-         <button class="btn btn-outline-success" type="submit">Search</button>
-       </form> -->
-
-            <!-- <a class="text-reset me-3" href="addtocart.php"  id="shopping-cart-btn">
-              <i class="fa-solid fa-cart-shopping fa-lg"></i>
-              <p class="cart-count">1</p>
-            </a> -->
 
             <?php
               if(isset($_SESSION['u_id'])) {
