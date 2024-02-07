@@ -80,6 +80,7 @@
       <div class="col-lg-6">
         <div class="row mb-5">
             <div class="col-6">
+                <a href="orders.php" class="nav-link">
                 <div class="bg-warning" style="
                 /* width: 230px;  */
                 min-height: 150px; 
@@ -93,8 +94,10 @@
                 ">
                    <i class="fa-solid fa-truck-fast me-4"></i> <h2>Orders</h2>
                 </div>
+                </a>
             </div>
             <div class="col-6">
+                <a href="contact.php" class="nav-link">
                 <div class="bg-secondary" style="
                 /* width: 230px;  */
                 min-height: 150px; 
@@ -102,9 +105,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                font-size: 25px;
+                color: white;
+                padding: 10px;
+                text-align: center;
                 ">
-                    <h2>How are you</h2>
+                   </i> <h2>Help & Contact</h2>
                 </div>
+                </a>
             </div>
         </div>
         

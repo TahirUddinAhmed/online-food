@@ -44,11 +44,17 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Order</a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="contact.php">Contact</a>
               </li>
+              <?php
+                if(isset($_SESSION['u_id'])) {
+              ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="orders.php">Order</a>
+                  </li>
+              <?php
+                }
+              ?>
             </ul>
             <!-- <form class="d-flex" role="search">
          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
