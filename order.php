@@ -84,7 +84,7 @@
     if(empty($error)) {
         // insert into data base 
         
-        $sql = "INSERT INTO `orders` (`user_id`, `customer_name`, `email`, `phone`, `address`, `quantity`, `total_price`, `order_date`, `food_id`) VALUES ('$uId', '$username', '$userEmail', '$userPhone', '$userAddress', '$quantity', '$offer_price', current_timestamp(), '$food_id')";
+        $sql = "INSERT INTO `orders` (`user_id`, `customer_name`, `email`, `phone`, `address`, `quantity`, `total_price`, `status` , `order_date`, `food_id`) VALUES ('$uId', '$username', '$userEmail', '$userPhone', '$userAddress', '$quantity', '$offer_price', 'pending' , current_timestamp(), '$food_id')";
         $result = mysqli_query($conn, $sql);
 
         if(!$result) {

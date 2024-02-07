@@ -4,12 +4,40 @@
   $result = mysqli_query($conn, $query);
   $no_of_orders = mysqli_num_rows($result);
 
+//   Delete order
+  if(isset($_GET['o_id'])) {
+    $o_id = $_GET['o_id'];
+
+    // query to delete record
+    $delete = "DELETE FROM orders WHERE order_id = $o_id";
+    $deleteRes = mysqli_query($conn, $delete);
+
+    if(!$deleteRes) {
+        die("QUERY FAILED" . mysqli_error($conn));
+    } else {
+        header("location: orders.php?deleted");
+    }
+
+  }
 
 
 ?>
 <div id="layoutSidenav_content">
     <main>
+    
+
         <div class="container mt-3">
+        <?php
+        if(isset($_GET['deleted'])) {
+        ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            Order has been deleted.
+            
+        </div>
+        <?php
+            }
+        ?>
+
             <h3>All Orders</h3>
             <hr>
 
@@ -21,9 +49,11 @@
                             <tr>
                                 <th>SNO</th>
                                 <th># Order image</th>
-                                <th>Buyer details</th>
-                                <th>Customer Details</th>
+                                <th># Buyer details</th>
+                                <th># Customer Details</th>
+                                <th>Status</th>
                                 <th>Confirm order</th>
+                                <th>Date and Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -31,9 +61,11 @@
                             <tr>
                                 <th>SNO</th>
                                 <th># Order image</th>
-                                <th>Customer details</th>
-                                <th>Buyer Details</th>
+                                <th># Buyer details</th>
+                                <th># Customer Details</th>
+                                <th>Status</th>
                                 <th>Confirm order</th>
+                                <th>Date and Time</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -51,6 +83,7 @@
                                     $email = $row['email'];
                                     $phone = $row['phone'];
                                     $address = $row['address'];
+                                    $date = $row['order_date'];
 
                                     // query to retrieve the food details
                                     $foodQuery = "SELECT * FROM menuitems WHERE ItemID = $foodID";
@@ -62,6 +95,8 @@
                                         $foodTitle = $data['Name'];
                                     }
 
+
+                                    // $order_date = date_format($date, "d l");
                             ?>
                                 <tr>
                                     <td><?= $sno ?></td>
@@ -71,8 +106,8 @@
                                     </td>
                                     <td>
                                         <p><strong><?= $foodTitle ?></strong></p>
-                                        <p>Price: <?= $price ?></p>
                                         <p>Quantity: <?= $quantity ?></p>
+                                        <p>Total Price: <?= $price * $quantity ?></p>
                                     </td>
                                     <td>
                                         <p><strong><?= $customer_name ?></strong></p>
@@ -82,12 +117,21 @@
                                     </td>
 
                                     <td>
+                                        <!-- status -->
+                                       <?= $status ?>
+                                    </td>
+
+                                    <td>
                                         <!-- confirm button -->
-                                        <a href="">confirm</a>
+                                        <a href="" class="btn btn-sm btn-success">Confirm</a>
+                                        <!-- cancel -->
+                                        <a href="" class="btn btn-sm btn-warning">Cancel</a>
                                     </td>
                                     <td>
-                                        <a href="">delete</a>
-                                        <a href="">edit</a>
+                                        <?= date("d M Y h:i A", strtotime($date)) ?>
+                                    </td>
+                                    <td>
+                                        <a href="?o_id=<?= $orderID ?>" class="btn btn-sm btn-danger" onclick="return confirm('Do you want to delete this order?')">delete</a>
                                     </td>
                                     
                                 </tr>
