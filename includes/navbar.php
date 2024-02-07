@@ -63,11 +63,15 @@
             <?php
               if(isset($_SESSION['u_id'])) {
                 ?>
-                  <div class="d-flex align-items-center">
-                    <a href="admin/" id="register" class="btn btn-outline-info">
-                      <i class="fa-solid fa-user fa-2xm me-2"></i> <?= $_SESSION['fullname'] ?? null ?>
-                    </a>
-                  </div>
+                  <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                      <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i> <?= $_SESSION['fullname'] ?? null ?></a>
+                          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                              <li><hr class="dropdown-divider" /></li>
+                              <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                          </ul>
+                      </li>
+                  </ul>
 
                 <?php
               } else {

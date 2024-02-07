@@ -44,7 +44,7 @@
         $_SESSION['fullname'] = $fullname;
   
         // redirect to the admin home page
-        header("location: index.php");
+        header("location: shop.php");
         exit();
   
       }
