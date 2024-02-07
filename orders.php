@@ -93,6 +93,12 @@
     <?php
 
             }
+        } else {
+    ?>
+
+            <h5 class="text-center text-muted">"Your order history is currently empty. Explore our delicious menu and place your order to fill this space with mouthwatering delights!"</h5>
+            <p class="mt-2 text-center"><a href="shop.php">Browse delicious food item </a></p>
+    <?php
         }
     ?>
         

@@ -99,12 +99,7 @@
                                                 <span class="text-danger"><?= $passErr ?? null ?></span>
                                                 <span class="text-danger"><?= $wrongPass ?? null ?></span>
                                             </div>
-                                            <div class="form-check mb-3">
-                                                <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />
-                                                <label class="form-check-label" for="inputRememberPassword">Remember Password</label>
-                                            </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                                <a class="small" href="password.html">Forgot Password?</a>
                                                 <input type="submit" name="admin-login" value="Login" class="btn btn-primary">
                                             </div>
                                         </form>

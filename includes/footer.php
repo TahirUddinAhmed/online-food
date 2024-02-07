@@ -1,15 +1,22 @@
+<?php
+//  query 
+    $query = "SELECT * FROM category";
+    $result = mysqli_query($conn, $query);
 
-
+    if(!$result) {
+        die("QUERY FAILED" . mysqli_error($conn));
+    } 
+?>
 <footer class="text-center text-lg-start bg-dark text-muted">
       <div class="upper-footer">
         <div class="footer-a">
           <h3>Quick Link</h3>
           <div class="footer-link">
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Category</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="index.php">Home</a></li>
+              <li><a href="about.php">About</a></li>
+              <li><a href="shop.php">Shop</a></li>
+              <li><a href="contact.php">Contact</a></li>
               <li><a href="./Admin/index.php">My Account</a></li>
             </ul>
           </div>
@@ -19,11 +26,30 @@
           <h3>Top Category</h3>
           <div class="footer-link">
             <ul>
-              <li><a href="#">Veg Thali</a></li>
-              <li><a href="#">Non-Veg Thali</a></li>
-              <li><a href="#">Fast Food</a></li>
-              <li><a href="#">Pizza</a></li>
-              <li><a href="#">Pasta</a></li>
+          <?php
+              while($data=mysqli_fetch_assoc($result)) {
+                $cat_id = $data['cat_id'];
+                $cat_name = $data['name'];
+                // number of food items added 
+                $FoodQuery = "SELECT * FROM menuitems WHERE categoryID = $cat_id";
+                $FoodRes = mysqli_query($conn, $FoodQuery);
+                $num_of_items = mysqli_num_rows($FoodRes);
+
+            if($num_of_items > 0) {
+                
+           
+          ?>
+                <form action="shopCat.php" method="POST">
+                  <input type="hidden" name="categories" value="<?= $cat_id ?>">
+                  <li>
+                    <input type="submit" value="<?= $cat_name ?>" style="border: none; background: none; color: white;">
+                  </li>
+                </form>
+
+          <?php
+           }
+              }
+          ?>
             </ul>
           </div>
         </div>
@@ -33,7 +59,7 @@
             <ul>
               <li><a href="#">148, Morigaon, Assam</a></li>
               <li>Email: <a href="#">barasha163@gmail.com</a></li>
-              <li>Mobile<a href="#">7099608976</a></li>
+              <li>Mobile: <a href="#">7099608976</a></li>
             </ul>
           </div>
         </div>

@@ -25,7 +25,7 @@
                 while($row=mysqli_fetch_assoc($FoodRes)) {
                     $Food_cat_id = $row['CategoryID'];
                     $foodImg = $row['food_img'];
-                }
+            }
         ?>
             <div class="category-items">
                 <div class="cat-content">
