@@ -5,6 +5,19 @@
  <?php
     if(!isset($_SESSION['u_id'])) {
         header("location: login.php");
+    } else {
+        $userID = $_SESSION['u_id'];
+        $query = "SELECT * FROM users WHERE UserID = $userID";
+        $result = mysqli_query($conn, $query);
+
+        while($data=mysqli_fetch_assoc($result)) {
+            $role = $data['role'];
+        }
+
+        if($role !== 'admin') {
+            header("location: ../index.php");
+        }
+
     }
  ?>
 
