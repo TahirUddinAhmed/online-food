@@ -8,7 +8,7 @@
     }
 ?>
 <div class="container mt-4">
-    <h2 class="text-center">Top Food Items</h2>
+    <h2 class="text-center">Top Food Categories</h2>
     <div class="food-category">
     <?php
      if(mysqli_num_rows($result)) {
@@ -19,19 +19,27 @@
             // number of food items added 
             $FoodQuery = "SELECT * FROM menuitems WHERE categoryID = $catID";
             $FoodRes = mysqli_query($conn, $FoodQuery);
+            $num_of_items = mysqli_num_rows($FoodRes);
 
-            if(mysqli_num_rows($FoodRes) > 0) {
+            if($num_of_items > 0) {
                 while($row=mysqli_fetch_assoc($FoodRes)) {
                     $Food_cat_id = $row['CategoryID'];
                     $foodImg = $row['food_img'];
                 }
         ?>
             <div class="category-items">
-                <div class="cat-img">
-                    <img src="./assets/Restaurant/<?= $foodImg ?>" alt="" />
-                </div>
                 <div class="cat-content">
-                    <h4><?= $catName ?></h4>
+                    <form action="shopCat.php" method="POST">
+                        <input type="hidden" name="categories" value="<?= $catID ?>">
+                        
+                        <h4>
+                        <input type="submit" value="<?= $catName ?>" style="border: none;">
+                        </h4>
+                    </form>
+                    
+                    <div class="mt-2 text-center">
+                        <p class="text-muted"># items: <?= $num_of_items ?></p>
+                    </div>
                 </div>
            </div>
         <?php
@@ -40,104 +48,5 @@
         }
      }
     ?>
-        
-        <!-- <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/9.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <div class="starr">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <h4>Veg Thali</h4>
-            </div>
-        </div>
-        <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/pasta3.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <div class="starr">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <h4>Veg Momo</h4>
-            </div>
-        </div>
-        <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/ch5.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <div class="starr">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <h4>Pizza</h4>
-            </div>
-        </div>
-        <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/s4.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <div class="starr">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <h4>Veg Soup</h4>
-            </div>
-        </div>
-        <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/pasta1.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <h4>Dosasss</h4>
-            </div>
-        </div>
-        <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/n7.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <div class="starr">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <h4>Non-Veg Thali</h4>
-            </div>
-        </div>
-        <div class="category-items">
-            <div class="cat-img">
-                <img src="./assets/Restaurant/para6.jpg" alt="" />
-            </div>
-            <div class="cat-content">
-                <div class="starr">
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                </div>
-                <h4>Roti Thali</h4>
-            </div>
-        </div> -->
     </div>
 </div>
