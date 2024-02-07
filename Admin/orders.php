@@ -20,6 +20,36 @@
 
   }
 
+//   Confirm a order: Mark as delivered
+ if(isset($_GET['confirm_id'])) {
+    $theId = $_GET['confirm_id'];
+
+    // update the status column to 'delivered'
+    $confirmQ = "UPDATE orders SET status = 'delivered' WHERE order_id = $theId";
+    $confirmRes = mysqli_query($conn, $confirmQ);
+
+    if(!$confirmRes) {
+        die("QUERY FAILED" . mysqli_error($conn));
+    } else {
+        header("Location: orders.php?confirmed");
+    }
+ }
+
+//  Cancel a Order
+ if(isset($_GET['cancel'])) {
+    $orderId = $_GET['cancel'];
+
+    // cancel query: Update status 
+    $cancelQ = "UPDATE orders SET `status` = 'canceled' WHERE `order_id` = $orderId";
+    $cancelRes = mysqli_query($conn, $cancelQ);
+
+    if(!$cancelRes) {
+        die("QUERY FAILED" . mysqli_error($conn));
+    } else {
+        header("Location: orders.php?canceled");
+    }
+ }
+
 
 ?>
 <div id="layoutSidenav_content">
@@ -27,12 +57,32 @@
     
 
         <div class="container mt-3">
+        <!-- Delete alert -->
         <?php
         if(isset($_GET['deleted'])) {
         ?>
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Order has been deleted.
-            
+            The Order has been deleted.
+        </div>
+        <?php
+            }
+        ?>
+        <!-- confirmed(Delivered) alert -->
+        <?php
+        if(isset($_GET['confirmed'])) {
+        ?>
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            The Order has been delivered.
+        </div>
+        <?php
+            }
+        ?>
+        <!-- Cancel Alert -->
+        <?php
+        if(isset($_GET['canceled'])) {
+        ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            The Order has been canceled.
         </div>
         <?php
             }
@@ -102,10 +152,16 @@
                                     <td><?= $sno ?></td>
                                     <td>
                                         <!-- image -->
-                                        <img src="../assets/Restaurant/<?= $foodImg ?>" width="180" class="img-fluid" alt="">
+                                        <a href="../food-items.php?id=<?= $foodID ?>">
+                                         <img src="../assets/Restaurant/<?= $foodImg ?>" width="180" class="img-fluid" alt="">
+                                        </a>
                                     </td>
                                     <td>
-                                        <p><strong><?= $foodTitle ?></strong></p>
+                                        <p><strong>
+                                            <a href="../food-items.php?id=<?= $foodID ?>">
+                                              <?= $foodTitle ?>
+                                            </a>
+                                        </strong></p>
                                         <p>Quantity: <?= $quantity ?></p>
                                         <p>Total Price: <?= $price * $quantity ?></p>
                                     </td>
@@ -123,9 +179,9 @@
 
                                     <td>
                                         <!-- confirm button -->
-                                        <a href="" class="btn btn-sm btn-success">Confirm</a>
+                                        <a href="?confirm_id=<?= $orderID ?>" class="btn btn-sm btn-success" onclick="return confirm('Mark As Delivered')">Confirm</a>
                                         <!-- cancel -->
-                                        <a href="" class="btn btn-sm btn-warning">Cancel</a>
+                                        <a href="?cancel=<?= $orderID ?>" class="btn btn-sm btn-warning" onclick="return confirm('Want to cancel this order?')">Cancel</a>
                                     </td>
                                     <td>
                                         <?= date("d M Y h:i A", strtotime($date)) ?>
